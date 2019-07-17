@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class Slide1 extends AppCompatActivity  {
 
@@ -19,7 +22,7 @@ public class Slide1 extends AppCompatActivity  {
     private SliderAdapter sliderAdapter;
 
     private TextView[] dots;
-    private ImageButton upload;
+    private Button upload;
     private ImageButton right_button;
     private ImageButton left_button;
     private int nCurrent;
@@ -32,8 +35,8 @@ public class Slide1 extends AppCompatActivity  {
 
         nSlideViewPager = (ViewPager) findViewById(R.id.slider);
         nLayout = (LinearLayout) findViewById(R.id.layout);
-        upload = (ImageButton) findViewById(R.id.button3);
-        right_button = (ImageButton) findViewById(R.id.button);
+        upload =  findViewById(R.id.button6);
+        right_button = (ImageButton) findViewById(R.id.button3);
         left_button = (ImageButton) findViewById(R.id.button2);
 
         sliderAdapter = new SliderAdapter(this);
@@ -53,6 +56,28 @@ public class Slide1 extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 nSlideViewPager.setCurrentItem(nCurrent - 1);
+            }
+        });
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    int current=getItem(1);
+                    if(current==1) {
+
+
+                        launch_fertilizer();
+                    }
+                    if(current==2){
+                        launch_pesticide();
+                    }
+                    if(current==3){
+                        launch_weather();
+                    }
+
+
+
             }
         });
 
@@ -138,7 +163,7 @@ public class Slide1 extends AppCompatActivity  {
         return nSlideViewPager.getCurrentItem() + i;
     }
 
-   public void upload(View v){
+   /*public void upload(View v){
         int current=getItem(1);
         if(current==1) {
 
@@ -153,25 +178,24 @@ public class Slide1 extends AppCompatActivity  {
         }
 
 
-    }
+    }*/
 
 
     private void launch_fertilizer() {
 
-        startActivity(new Intent(this, Fertilizer.class));
+        startActivity(new Intent(this, Main2Activity.class));
         finish();
     }
 
     private void launch_weather() {
-        startActivity(new Intent(this, Weather.class));
+        startActivity(new Intent(this, Main3Activity.class));
         finish();
     }
 
     private void launch_pesticide() {
-        startActivity(new Intent(this, Pesticide.class));
+        startActivity(new Intent(this, Main4Activity.class));
         finish();
     }
-
 
 
 
